@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 	
-	@Query("SELECT e FROM Evento e WHERE e.adm.id = :admId")
-	List<Evento> findByAdmId(@Param("admId") Long admId);
+	@Query("SELECT e FROM Evento e WHERE e.administrador.id = :id_admin")
+	List<Evento> findByAdmId(@Param("id_admin") Long id);
 }

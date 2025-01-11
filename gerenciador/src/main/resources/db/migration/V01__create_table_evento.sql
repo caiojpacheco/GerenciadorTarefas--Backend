@@ -1,15 +1,14 @@
 -- Criação da tabela evento
 CREATE TABLE evento (
-	id_evento SERIAL PRIMARY KEY UNIQUE NOT NULL,
-	nome VARCHAR(200),
-	data DATE NOT NULL,
-	localizacao VARCHAR(200) NOT NULL,
-	imagem VARCHAR(MAX),
-	id_admin BIGINT,
+    id_evento SERIAL PRIMARY KEY, -- PRIMARY KEY já implica em UNIQUE e NOT NULL
+    nome VARCHAR(200), -- Nome do evento (opcional)
+    data DATE NOT NULL, -- Data obrigatória do evento
+    localizacao VARCHAR(200) NOT NULL, -- Localização obrigatória
+    imagem TEXT, -- Ajustado para TEXT, pois VARCHAR(MAX) não é suportado no padrão SQL
+    id_admin BIGINT, -- Referência ao administrador
 
-	FOREIGN KEY (id_admin) REFERENCES admin(id_admin),
+    evento_dt_criacao TIMESTAMP DEFAULT NOW(), -- Data de criação com valor padrão
+    evento_dt_alteracao TIMESTAMP, -- Data de alteração (opcional)
 
-	evento_dt_criacao TIMESTAMP DEFAULT NOW(),
-    evento_dt_alteracao TIMESTAMP
-
+    FOREIGN KEY (id_admin) REFERENCES admin(id_admin) -- Chave estrangeira referenciando a tabela admin
 );

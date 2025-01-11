@@ -21,7 +21,7 @@ import jakarta.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @Table(name = "admin")
-@Entity(name = "admin")
+@Entity
 public class Administrador implements UserDetails {
 
 	@Id
@@ -45,7 +45,7 @@ public class Administrador implements UserDetails {
 	@Column(name = "nome", nullable = false, length = 50)
 	private String nome;
 
-	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL)
 	private List<Evento> eventos;
 
 	@Column(name = "admin_dt_cadastro", columnDefinition = "TIMESTAMP")

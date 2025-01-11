@@ -1,20 +1,26 @@
 package org.neki.gerenciador.service;
 
-import org.neki.gerenciador.repository.AdministradorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.neki.gerenciador.repository.AdministradorRepository;
 
 @Service
 public class AuthorizationService implements UserDetailsService {
-	@Autowired
-	AdministradorRepository administradorRepository; 
-	
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return administradorRepository.findByEmail(email);
-	}
-}    
+
+    private final AdministradorRepository administradorRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthorizationService(AdministradorRepository administradorRepository, PasswordEncoder passwordEncoder) {
+        this.administradorRepository = administradorRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return administradorRepository.findByEmail(username);
+    }
+}
