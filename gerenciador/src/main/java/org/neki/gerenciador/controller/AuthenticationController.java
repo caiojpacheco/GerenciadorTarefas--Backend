@@ -68,8 +68,8 @@ public class AuthenticationController {
 		if(!registerDto.senha().equals(registerDto.confirmaSenha())) {
 			   throw new Error("Senhas não são iguais");
 		}
-		this.administradorRepository.save(novoAdministrador);
 		novoAdministrador.setDataCadastro(LocalDateTime.now());
+		this.administradorRepository.save(novoAdministrador);
 		return ResponseEntity.ok().build();
 	}
 }
